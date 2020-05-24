@@ -1,0 +1,223 @@
+@use './colors' as c;
+
+body.popin {
+	overflow: hidden;
+
+	nav form * {
+		pointer-events: none;
+	}
+}
+
+.container {
+	max-width: 120;
+	margin: 0 auto;
+}
+
+.input-container {
+	position: relative;
+	border-radius: 0.5rem;
+	width: 100%;
+
+	> * {
+		display: block;
+		resize: none;
+		width: 100%;
+		border-radius: 0.5rem;
+		outline: none;
+		border: none;
+	}
+
+	> label {
+		position: absolute;
+		left: 1rem;
+		width: 80%;
+		top: 50%;
+		transform: translateY(-50%);
+
+		transition: color 0.3s, top 0.3s, transform 0.3s;
+		font-size: 1.4rem;
+		color: c.$primary;
+
+		&.alert {
+			color: red;
+		}
+	}
+
+	> input {
+		height: 100%;
+		padding: 0.5rem 1rem;
+
+		color: c.$primary;
+
+		&.alert {
+			border: 1px red solid;
+		}
+
+		&:required {
+			box-shadow: none;
+		}
+
+		&:focus + label,
+		&:not(:placeholder-shown) + label {
+			top: 0;
+			transform: translateY(-100%);
+			color: c.$secondary;
+		}
+	}
+}
+
+select {
+	position: relative;
+	display: block;
+	background-color: c.$secondary;
+	border-radius: 0.5rem;
+	padding: 0.05rem 1.8rem 0.05rem 0.1rem;
+	margin: 0 0.3rem;
+	border: 0.2rem solid transparent;
+	font-weight: 700;
+
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat, repeat;
+	background-position: right 0.5rem top 50%, 0 0;
+	background-size: 1rem auto, 100%;
+
+	color: rgba(0, 0, 0, 0);
+	text-shadow: 0 0 0 c.$text-pimary;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+
+	&::-ms-expand {
+		display: none;
+	}
+	&:hover,
+	&:focus {
+		border-color: c.$text-pimary;
+	}
+
+	> option {
+		background-color: c.$secondary;
+		color: c.$text-pimary;
+		font-weight: 600;
+	}
+}
+
+button {
+	position: relative;
+	display: block;
+	background-color: c.$secondary;
+	color: c.$text-pimary;
+	font-weight: 700;
+	border-radius: 0.5rem;
+
+	border: 0.2rem solid transparent;
+
+	&:hover,
+	&:focus {
+		border-color: c.$text-pimary;
+		outline: none;
+		box-shadow: none;
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+}
+
+// from : https://codepen.io/multanisadik/pen/JjYPpOo?editors=1100
+// modified a bit
+
+.loader-container {
+	$side: 3rem;
+
+	background-color: transparent;
+	width: $side;
+	height: $side;
+	position: relative;
+
+	.loader {
+		color: c.$text-pimary;
+		font-size: $side/5;
+		width: $side/5;
+		height: $side/5;
+		border-radius: 50%;
+		text-indent: -9999rem;
+		-webkit-animation: loadinganime 1.3s infinite linear;
+		animation: loadinganime 1.3s infinite linear;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 10;
+		margin: 0;
+		transform: translate(-50%, -50%);
+	}
+	@keyframes loadinganime {
+		0%,
+		100% {
+			box-shadow: 0 (-1 * $side/1.66) 0 ($side/25),
+				($side/2.5) (-1 * $side/2.5) 0 0, ($side/1.66) 0 0 (-1 * $side/5),
+				($side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				0 ($side/1.66) 0 (-1 * $side/5),
+				(-1 * $side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				(-1 * $side/1.66) 0 0 (-1 * $side/5),
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 0;
+		}
+		12.5% {
+			box-shadow: 0 (-1 * $side/1.66) 0 0,
+				($side/2.5) (-1 * $side/2.5) 0 ($side/25), ($side/1.66) 0 0 0,
+				($side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				0 ($side/1.66) 0 (-1 * $side/5),
+				(-1 * $side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				(-1 * $side/1.66) 0 0 (-1 * $side/5),
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5);
+		}
+		25% {
+			box-shadow: 0 (-1 * $side/1.66) 0 -0.5rem,
+				($side/2.5) (-1 * $side/2.5) 0 0, ($side/1.66) 0 0 ($side/25),
+				($side/2.5) ($side/2.5) 0 0, 0 ($side/1.66) 0 (-1 * $side/5),
+				(-1 * $side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				(-1 * $side/1.66) 0 0 (-1 * $side/5),
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5);
+		}
+		37.5% {
+			box-shadow: 0 (-1 * $side/1.66) 0 (-1 * $side/5),
+				($side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5), ($side/1.66) 0 0 0,
+				($side/2.5) ($side/2.5) 0 ($side/25), 0 ($side/1.66) 0 0,
+				(-1 * $side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				(-1 * $side/1.66) 0 0 (-1 * $side/5),
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5);
+		}
+		50% {
+			box-shadow: 0 (-1 * $side/1.66) 0 (-1 * $side/5),
+				($side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5),
+				($side/1.66) 0 0 (-1 * $side/5), ($side/2.5) ($side/2.5) 0 0,
+				0 ($side/1.66) 0 ($side/25), (-1 * $side/2.5) ($side/2.5) 0 0,
+				(-1 * $side/1.66) 0 0 (-1 * $side/5),
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5);
+		}
+		62.5% {
+			box-shadow: 0 (-1 * $side/1.66) 0 (-1 * $side/5),
+				($side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5),
+				($side/1.66) 0 0 (-1 * $side/5),
+				($side/2.5) ($side/2.5) 0 (-1 * $side/5), 0 ($side/1.66) 0 0,
+				(-1 * $side/2.5) ($side/2.5) 0 ($side/25), (-1 * $side/1.66) 0 0 0,
+				(-1 * $side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5);
+		}
+		75% {
+			box-shadow: 0 (-1 * $side/1.66) 0 (-1 * $side/5),
+				($side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5),
+				($side/1.66) 0 0 (-1 * $side/5),
+				($side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				0 ($side/1.66) 0 (-1 * $side/5), (-1 * $side/2.5) ($side/2.5) 0 0,
+				(-1 * $side/1.66) 0 0 ($side/25), (-1 * $side/2.5) (-1 * $side/2.5) 0 0;
+		}
+		87.5% {
+			box-shadow: 0 (-1 * $side/1.66) 0 0,
+				($side/2.5) (-1 * $side/2.5) 0 (-1 * $side/5),
+				($side/1.66) 0 0 (-1 * $side/5),
+				($side/2.5) ($side/2.5) 0 (-1 * $side/5),
+				0 ($side/1.66) 0 (-1 * $side/5), (-1 * $side/2.5) ($side/2.5) 0 0,
+				(-1 * $side/1.66) 0 0 0, (-1 * $side/2.5) (-1 * $side/2.5) 0 ($side/25);
+		}
+	}
+}

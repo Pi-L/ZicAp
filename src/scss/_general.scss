@@ -1,0 +1,306 @@
+@use './colors' as c;
+
+$navHeight: 6.4rem;
+$breakPointSmall: 41em;
+
+body {
+	background-color: c.$primary;
+	--starRating: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+	color: c.$text-pimary;
+}
+
+.disabled {
+	pointer-events: none;
+}
+
+.pil-header {
+	position: relative;
+	display: grid;
+	width: 100%;
+	padding: 1rem;
+	justify-content: flex-start;
+	align-items: center;
+	grid-template-columns: 8rem 1fr;
+	gap: 2rem;
+
+	> hr {
+		border-top: 0.5rem solid c.$secondary;
+		width: 100%;
+		grid-column: span 2;
+		grid-row: 2;
+	}
+
+	> img {
+		height: 7rem;
+		width: auto;
+		padding: 0.6rem;
+		margin-left: 1rem;
+		align-self: start;
+	}
+
+	> h1 {
+		font-size: 4rem;
+		margin-right: 1rem;
+	}
+
+	@media screen AND (max-width: $breakPointSmall) {
+		grid-template-columns: 1fr 8rem;
+		> h1 {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		> img {
+			grid-column: 2;
+			grid-row: 1;
+		}
+	}
+}
+
+.pil-nav {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	height: $navHeight;
+	padding: 1rem;
+	background-color: c.$primary;
+
+	z-index: 1;
+
+	> form {
+		width: 100%;
+		margin-top: 1rem;
+		display: grid;
+		grid-template-columns: 1.3fr auto auto;
+
+		> fieldset {
+			width: 100%;
+			display: contents;
+
+			border: none;
+			margin: 0;
+			padding: 0;
+
+			> .input-container {
+				background-color: c.$text-pimary;
+			}
+		}
+	}
+}
+
+main {
+	color: c.$text-pimary;
+	padding: 1rem;
+	width: 100%;
+
+	* {
+		color: inherit;
+	}
+
+	> p {
+		width: max-content;
+		margin-left: auto;
+	}
+
+	> section {
+		width: 100%;
+		margin-top: 1rem;
+
+		> .message {
+			margin: 2rem auto;
+			font-style: italic;
+			text-align: center;
+		}
+	}
+
+	> button {
+		margin: 3rem auto;
+	}
+}
+
+.results-container {
+	> * {
+		width: 100%;
+	}
+
+	--templateCol: 6rem 20% 1fr 30% 7rem;
+	--templateRow: auto;
+	--gridGap: 0.5rem;
+
+	> .titles {
+		position: sticky;
+		top: $navHeight;
+		background-color: c.$primary;
+		z-index: 1;
+
+		display: grid;
+		grid-template-columns: var(--templateCol);
+		grid-template-rows: var(--templateRow);
+		gap: var(--gridGap);
+		align-items: start;
+		justify-items: start;
+		> p {
+			padding: 0 0.5rem;
+			font-weight: 700;
+		}
+
+		> p:last-of-type {
+			justify-self: center;
+		}
+	}
+
+	> .results {
+		display: grid;
+		grid-template-columns: var(--templateCol);
+		grid-template-rows: var(--templateRow);
+		gap: var(--gridGap);
+		align-items: start;
+		justify-items: start;
+		margin-top: 1.5rem;
+
+		> * {
+			padding: 0 0.5rem;
+		}
+
+		> p {
+			margin: 0;
+		}
+
+		> button {
+			justify-self: center;
+			display: block;
+			margin: 0;
+
+			img {
+				$side: 2rem;
+				height: $side;
+				width: $side;
+			}
+		}
+	}
+
+	@media screen AND (max-width: $breakPointSmall) {
+		--templateCol: 5rem 35% 1fr 7rem;
+		--templateRow: auto auto;
+		--gridGap: 1.5rem;
+
+		> .titles,
+		> .results {
+			margin: 0;
+			padding: 1.5rem 0.5rem;
+			border-bottom: 0.2rem solid c.$text-pimary;
+
+			> button {
+				grid-column: -2 / span 1;
+				justify-self: center;
+			}
+			> p:nth-of-type(3) {
+				grid-column: span 2;
+				text-align: center;
+			}
+			> p:nth-of-type(4) {
+				grid-column: 2 / span 2;
+				justify-self: center;
+			}
+		}
+	}
+}
+
+.popinDetails {
+	background-color: c.$primary;
+	color: c.$text-pimary;
+	border: solid 1rem c.$secondary;
+	border-radius: 1rem;
+
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 5rem;
+	overflow: auto;
+
+	z-index: 10;
+
+	> section {
+		width: 100%;
+	}
+
+	> .popinDetails__header {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+	}
+
+	> .popinDetails__coverArt {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+
+		> h4 {
+			width: 100%;
+		}
+		img {
+			margin: 0.7rem 0.7rem 0 0;
+			flex: 0 0 auto;
+			min-width: 0;
+			width: auto;
+			height: 20rem;
+		}
+	}
+}
+
+.loader-container {
+	margin: 3rem auto;
+}
+
+.errors__container {
+	margin: 2rem 0;
+	width: 100%;
+
+	.errorMessage {
+		font-size: 0.8em;
+		padding-top: 1rem;
+		font-style: italic;
+		text-align: center;
+	}
+}
+
+.starRating--component {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	width: max-content;
+
+	> p {
+		margin-right: 0.5rem;
+	}
+
+	.stars {
+		width: max-content;
+
+		&::before {
+			content: '★★★★★';
+			font-size: 2rem;
+			letter-spacing: 0.1rem;
+			background: linear-gradient(
+				90deg,
+				#fc0 var(--starRating),
+				c.$text-pimary var(--starRating)
+			);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+}

@@ -1,0 +1,16 @@
+# Disable directory browsing
+Options All -Indexes
+
+# Deny access to all .htaccess files
+<files ~ "^.*\.([Hh][Tt][Aa])">
+order allow,deny
+deny from all
+satisfy all
+</files>
+
+# BEGIN Expire headers
+<FilesMatch "\.(jpg|jpeg|png|svg|gif|js|css|ttf|woff|woff2|eot)$">
+Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
+# END Expire headers
+
