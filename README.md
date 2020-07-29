@@ -1,7 +1,7 @@
 # ZicAp
 
 ## Description
-*This is Vanilla JavaScript or ReactJS exercise I developed with ReactJS while learning web development*<br>
+*This is Vanilla JavaScript or ReactJS exercise I developed with ReactJS while learning web development.*<br>
 *Zicap consumes [MusicBrainz API][3] to present artist, release and title search results to the user. It can then show details (cover art, duration, albums, rating, genre) about a result in a modal.*
 
 **Date : 05/2020**
